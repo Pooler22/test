@@ -1,3 +1,11 @@
+Scripts with Docker
+
+docker-compose up -d - Start your project and it will be available at http://localhost:3000.
+docker-compose run --rm test /bin/bash - Access your container.
+
+
+Rest
+
 Test
 
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).

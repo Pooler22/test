@@ -1,19 +1,14 @@
-FROM node:6.10
+FROM node:6.9.4
 
-LABEL authors="hoatle <hoatle@teracy.com>"
+# Prepare app directory
+RUN mkdir -p /usr/src/app
+WORKDIR /usr/src/app/
 
-# add more arguments from CI to the image so that `$ env` should reveal more info
-ARG CI_BUILD_ID
-ARG CI_BUILD_REF
-ARG CI_REGISTRY_IMAGE
-ARG CI_PROJECT_NAME
-ARG CI_BUILD_REF_NAME
-ARG CI_BUILD_TIME
-ARG CI_BUILD_NUMBER
-ARG CI_BUILDER
+# Install dependencies
+COPY package.json /usr/src/app/
+RUN npm install --silent
 
-ENV CI_BUILD_ID=$CI_BUILD_ID CI_BUILD_REF=$CI_BUILD_REF CI_REGISTRY_IMAGE=$CI_REGISTRY_IMAGE \
-    CI_PROJECT_NAME=$CI_PROJECT_NAME CI_BUILD_REF_NAME=$CI_BUILD_REF_NAME CI_BUILD_TIME=$CI_BUILD_TIME \
-    CI_BUILD_NUMBER=$CI_BUILD_NUMBER CI_BUILDER=$CI_BUILDER
+ADD . /usr/src/app/
 
-RUN yarn global add create-react-app && rm -rf $(yarn cache dir)
+EXPOSE 3000
+CMD [ "npm", "start" ]
