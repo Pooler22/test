@@ -1,9 +1,11 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import App from './App'
+import App from './../../src/Containers/App'
+
+const { describe, it } = global
 
 describe('App', () => {
-  test('renders without crashing', () => {
+  it('renders without crashing', () => {
     const div = document.createElement('div')
     ReactDOM.render(<App />, div)
   })
